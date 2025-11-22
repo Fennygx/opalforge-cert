@@ -17,27 +17,34 @@
             font-family: 'Courier New', Courier, monospace;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Changed from center to allow scrolling */
             min-height: 100vh;
-            overflow: hidden; /* Prevents scrollbars for the background effect */
+            padding: 20px 0; /* Adds space top/bottom on mobile */
+            /* REMOVED overflow: hidden so you can scroll! */
         }
 
         /* MAIN CONTAINER */
         .certificate-container {
             position: relative;
             width: 90%;
-            max-width: 600px;
-            border: 2px solid #333;
+            max-width: 600px; /* Keeps it "thin" like you prefer */
+            
+            /* UPDATED: Main Border is now Cyan Blue */
+            border: 2px solid #00ffff; 
+            
             padding: 2rem;
-            background: #0a0a0a; /* Slightly lighter black for card feel */
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.05);
-            z-index: 10; /* Keeps it above the background animation */
+            background: #0a0a0a;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+            margin-bottom: 20px; /* Ensures space at bottom of page */
         }
 
         /* HEADER SECTION */
         .header {
             text-align: center;
-            border-bottom: 1px solid #333;
+            
+            /* UPDATED: Header Divider Line is now Cyan Blue */
+            border-bottom: 1px solid #00ffff;
+            
             padding-bottom: 1.5rem;
             margin-bottom: 1.5rem;
         }
@@ -61,11 +68,11 @@
         .cert-id {
             margin-top: 1rem;
             font-size: 0.9rem;
-            color: #0ff; /* Cyan accent color */
+            color: #0ff; 
             text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
         }
 
-        /* ITEM DETAILS SECTION (UPDATED) */
+        /* ITEM DETAILS SECTION */
         .item-details {
             margin-bottom: 2rem;
         }
@@ -82,7 +89,7 @@
             margin-bottom: 0.5rem;
             font-size: 0.9rem;
             color: #aaa;
-            border-bottom: 1px dashed #222;
+            border-bottom: 1px dashed #333; /* Kept dashed lines gray for readability */
             padding-bottom: 5px;
         }
         .detail-line span {
@@ -97,7 +104,10 @@
             margin-bottom: 2rem;
         }
         .authenticity-badge {
-            border: 1px solid #333;
+            /* UPDATED: Report Box Border is now Cyan Blue */
+            border: 1px solid #00ffff;
+            box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.05);
+            
             padding: 1.5rem;
             position: relative;
             background: rgba(0, 255, 255, 0.02);
@@ -128,7 +138,7 @@
             width: 100px;
             height: 100px;
             margin: 0 auto;
-            background-color: #fff; /* White background for QR visibility */
+            background-color: #fff; 
             padding: 5px; 
         }
         .trust-text {
@@ -196,14 +206,15 @@
 
             if (!certId) {
                 displayElement.textContent = 'Error: ID not found. Please verify the link.';
+                // We intentionally DO NOT load the mock data if no ID is present.
+                // This keeps the "Loading..." text so users don't see fake data on a broken link.
                 return; 
             }
 
             // Display the ID immediately
             displayElement.textContent = certId;
 
-            // 2. MOCK DATABASE - This simulates looking up the shoe!
-            // In the future, you will replace this with a fetch() to your Worker.
+            // 2. MOCK DATABASE - Simulating data retrieval
             const mockDatabaseResponse = {
                 model: "Air Jordan 1 High OG",
                 colorway: "Lost & Found",
@@ -213,8 +224,9 @@
                 date: new Date().toLocaleDateString()
             };
 
-            // 3. Populate the HTML fields with the data
-            setTimeout(() => { // Slight delay to look like it's "thinking"
+            // 3. Populate the HTML fields
+            // Added a small delay to simulate the "AI Thinking" feel
+            setTimeout(() => { 
                 document.getElementById('model').textContent = mockDatabaseResponse.model;
                 document.getElementById('colorway').textContent = mockDatabaseResponse.colorway;
                 document.getElementById('size').textContent = mockDatabaseResponse.size;
