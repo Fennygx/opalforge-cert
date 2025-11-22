@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpalForge Verification</title>
-    <style>
+<style>
     /* RESET & BASE STYLES */
     * {
         margin: 0;
@@ -42,12 +36,12 @@
         margin-bottom: 1.5rem;
     }
     .logo {
-        width: 100px; /* INCREASED SIZE for icon prominence */
+        width: 100px; /* Keeps the logo container size prominent */
         height: auto;
         margin-bottom: 1rem;
-        
-        /* NEW: Filter to blend white background into black, and make icon cyan */
-        filter: invert(100%) hue-rotate(180deg) saturate(200%) brightness(150%) drop-shadow(0 0 8px rgba(0, 255, 255, 0.4));
+        /* The image should now show its original colors, blending with background */
+        /* ENHANCED: Stronger drop-shadow to make the icon/symbol itself pop out */
+        filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.7)); 
     }
     h1 {
         font-size: 1.8rem;
@@ -57,6 +51,7 @@
     }
     .sub-header {
         font-size: 0.8rem;
+        /* UPDATED: Brighter Silver for readability */
         color: #cccccc; 
         letter-spacing: 1px;
     }
@@ -83,6 +78,7 @@
         justify-content: space-between;
         margin-bottom: 0.5rem;
         font-size: 0.9rem;
+        /* UPDATED: Brighter Silver */
         color: #cccccc; 
         border-bottom: 1px dashed #333; 
         padding-bottom: 5px;
@@ -107,6 +103,7 @@
     }
     .confidence-score {
         font-size: 0.8rem;
+        /* UPDATED: Brighter Silver */
         color: #cccccc; 
         margin-bottom: 0.5rem;
     }
@@ -119,6 +116,7 @@
     .date {
         margin-top: 0.5rem;
         font-size: 0.7rem;
+        /* UPDATED: Medium Gray (visible but distinct from data) */
         color: #aaaaaa; 
     }
 
@@ -131,14 +129,14 @@
         width: 100px;
         height: 100px;
         margin: 0 auto;
-        /* NEW: Filter to blend white background into black */
         filter: invert(100%) hue-rotate(180deg) saturate(0%) brightness(100%); /* Keeps QR black on white, but inverts if it was white on black */
-        background-color: #fff; /* Ensure white background for QR if needed */
+        background-color: #fff; 
         padding: 5px; 
     }
     .trust-text {
         margin-top: 1rem;
         font-size: 0.7rem;
+        /* UPDATED: Brighter Silver */
         color: #cccccc; 
         text-transform: uppercase;
         letter-spacing: 1px;
@@ -149,84 +147,10 @@
         text-align: center;
         margin-top: 2rem;
         font-size: 0.6rem;
+        /* UPDATED: Brighter Gray for readability */
         color: #aaaaaa; 
+        /* UPDATED: Footer Line is now Cyan Blue */
         border-top: 1px solid #00ffff; 
         padding-top: 1rem;
     }
 </style>
-</head>
-<body>
-
-    <div class="certificate-container">
-        <div class="header">
-            <img src="OpalForge-Logo.png" alt="OpalForge Logo" class="logo">
-            <h1>OPALFORGE</h1>
-            <p class="sub-header">OFFICIAL AI AUTHENTICATION CERTIFICATE</p>
-            <p class="cert-id">CERTIFICATE ID: <span id="certificate-id-display">Verifying...</span></p>
-        </div>
-
-        <div class="item-details">
-            <h3>ITEM DETAILS</h3>
-            <div class="detail-line">SNEAKER MODEL: <span id="model">Loading...</span></div>
-            <div class="detail-line">COLORWAY: <span id="colorway">Loading...</span></div>
-            <div class="detail-line">SIZE: <span id="size">Loading...</span></div>
-            <div class="detail-line">CONDITION: <span id="condition">Loading...</span></div>
-        </div>
-
-        <div class="auth-report">
-            <h3>AUTHENTICATION REPORT</h3>
-            <div class="authenticity-badge">
-                <p class="confidence-score">AI CONFIDENCE SCORE</p>
-                <p class="score-percent" id="score">--.-%</p>
-                <p class="date" id="date">AUTHENTICATION DATE: --</p>
-            </div>
-        </div>
-
-        <div class="qr-section">
-            <img src="qr-code-placeholder.png" alt="Scan to Verify" class="qr-placeholder">
-            <p class="trust-text">FORGE UNBREAKABLE PROOF. OWN THE ETERNAL.</p>
-        </div>
-
-        <div class="footer">
-            <p>Powered by UNIVERSAL TRUST OS</p>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            // 1. Get the ID from the URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const certId = urlParams.get('cert_id');
-            const displayElement = document.getElementById('certificate-id-display');
-
-            if (!certId) {
-                displayElement.textContent = 'Error: ID not found. Please verify the link.';
-                return; 
-            }
-
-            // Display the ID immediately
-            displayElement.textContent = certId;
-
-            // 2. MOCK DATABASE - Simulating data retrieval
-            const mockDatabaseResponse = {
-                model: "Air Jordan 1 High OG",
-                colorway: "Lost & Found",
-                size: "US 10.5",
-                condition: "Pristine / Deadstock",
-                score: "99.9% AUTHENTICITY",
-                date: new Date().toLocaleDateString()
-            };
-
-            // 3. Populate the HTML fields
-            setTimeout(() => { 
-                document.getElementById('model').textContent = mockDatabaseResponse.model;
-                document.getElementById('colorway').textContent = mockDatabaseResponse.colorway;
-                document.getElementById('size').textContent = mockDatabaseResponse.size;
-                document.getElementById('condition').textContent = mockDatabaseResponse.condition;
-                document.getElementById('score').textContent = mockDatabaseResponse.score;
-                document.getElementById('date').textContent = 'AUTHENTICATION DATE: ' + mockDatabaseResponse.date;
-            }, 500);
-        });
-    </script>
-</body>
-</html>
