@@ -189,4 +189,50 @@
         </div>
 
         <div class="qr-section">
-            <img src="qr-code-placeholder.png" alt="Scan to Verify
+            <img src="qr-code-placeholder.png" alt="Scan to Verify" class="qr-placeholder">
+            <p class="trust-text">FORGE UNBREAKABLE PROOF. OWN THE ETERNAL.</p>
+        </div>
+
+        <div class="footer">
+            <p>Powered by UNIVERSAL TRUST OS</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 1. Get the ID from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const certId = urlParams.get('cert_id');
+            const displayElement = document.getElementById('certificate-id-display');
+
+            if (!certId) {
+                displayElement.textContent = 'Error: ID not found. Please verify the link.';
+                return; 
+            }
+
+            // Display the ID immediately
+            displayElement.textContent = certId;
+
+            // 2. MOCK DATABASE - Simulating data retrieval (FOR TESTING ONLY)
+            const mockDatabaseResponse = {
+                model: "Air Jordan 1 High OG",
+                colorway: "Lost & Found",
+                size: "US 10.5",
+                condition: "Pristine / Deadstock",
+                score: "99.9% AUTHENTICITY",
+                date: new Date().toLocaleDateString()
+            };
+
+            // 3. Populate the HTML fields
+            setTimeout(() => { 
+                document.getElementById('model').textContent = mockDatabaseResponse.model;
+                document.getElementById('colorway').textContent = mockDatabaseResponse.colorway;
+                document.getElementById('size').textContent = mockDatabaseResponse.size;
+                document.getElementById('condition').textContent = mockDatabaseResponse.condition;
+                document.getElementById('score').textContent = mockDatabaseResponse.score;
+                document.getElementById('date').textContent = 'AUTHENTICATION DATE: ' + mockDatabaseResponse.date;
+            }, 500);
+        });
+    </script>
+</body>
+</html>
