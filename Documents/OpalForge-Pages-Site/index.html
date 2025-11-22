@@ -3,73 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpalForge Official Certificate</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <title>OpalForge Verification</title>
+    <style>
+        /* RESET & BASE STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #000;
+            color: #e0e0e0;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden; /* Prevents scrollbars for the background effect */
+        }
+
+        /* MAIN CONTAINER */
+        .certificate-container {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            border: 2px solid #333;
+            padding: 2rem;
+            background: #0a0a0a; /* Slightly lighter black for card feel */
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.05);
+            z-index: 10; /* Keeps it above the background animation */
+        }
+
+        /* HEADER SECTION */
+        .header {
+            text-align: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+        }
+        h1 {
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        .sub-header {
+            font-size: 0.8rem;
+            color: #888;
+            letter-spacing: 1px;
+        }
+        .cert-id {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #0ff; /* Cyan accent color */
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
+        }
+
+        /* ITEM DETAILS SECTION (UPDATED) */
+        .item-details {
+            margin-bottom: 2rem;
+        }
+        .item-details h3 {
+            font-size: 1rem;
+            border-left: 3px solid #0ff;
+            padding-left: 10px;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        .detail-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: #aaa;
+            border-bottom: 1px dashed #222;
+            padding-bottom: 5px;
+        }
+        .detail-line span {
+            color: #fff;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        /* AUTHENTICATION REPORT SECTION */
+        .auth-report {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .authenticity-badge {
+            border: 1px solid #333;
+            padding: 1.5rem;
+            position: relative;
+            background: rgba(0, 255, 255, 0.02);
+        }
+        .confidence-score {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+        .score-percent {
+            font-size: 2.5rem;
+            color: #0ff;
+            font-weight: bold;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+        .date {
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+            color: #666;
+        }
+
+        /* QR CODE SECTION */
+        .qr-section {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .qr-placeholder {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            background-color: #fff; /* White background for QR visibility */
+            padding: 5px; 
+        }
+        .trust-text {
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.6rem;
+            color: #444;
+            border-top: 1px solid #333;
+            padding-top: 1rem;
+        }
+    </style>
 </head>
 <body>
 
     <div class="certificate-container">
-
         <div class="header">
             <img src="OpalForge-Logo.png" alt="OpalForge Logo" class="logo">
             <h1>OPALFORGE</h1>
-            <h2>OFFICIAL AI AUTHENTICATION CERTIFICATE</h2>
+            <p class="sub-header">OFFICIAL AI AUTHENTICATION CERTIFICATE</p>
+            <p class="cert-id">CERTIFICATE ID: <span id="certificate-id-display">Verifying...</span></p>
         </div>
 
-        <div class="certificate-id-box">
-            CERTIFICATE ID: <span id="certificate-id-display">LOADING...</span>
+        <div class="item-details">
+            <h3>ITEM DETAILS</h3>
+            <div class="detail-line">SNEAKER MODEL: <span id="model">Loading...</span></div>
+            <div class="detail-line">COLORWAY: <span id="colorway">Loading...</span></div>
+            <div class="detail-line">SIZE: <span id="size">Loading...</span></div>
+            <div class="detail-line">CONDITION: <span id="condition">Loading...</span></div>
         </div>
 
-        <div class="content-grid">
-            
-            <div class="item-details">
-                <h3>ITEM DETAILS</h3>
-                <div class="detail-line">SNEAKER MODEL: <span></span></div>
-                <div class="detail-line">COLORWAY: <span></span></div>
-                <div class="detail-line">SIZE: <span></span></div>
-                <div class="detail-line">CONDITION: <span></span></div>
+        <div class="auth-report">
+            <h3>AUTHENTICATION REPORT</h3>
+            <div class="authenticity-badge">
+                <p class="confidence-score">AI CONFIDENCE SCORE</p>
+                <p class="score-percent" id="score">--.-%</p>
+                <p class="date" id="date">AUTHENTICATION DATE: --</p>
             </div>
+        </div>
 
-            <div class="auth-report">
-                <h3>AUTHENTICATION REPORT</h3>
-                <div class="authenticity-badge">
-                    <div class="core-ring"></div>
-                    <div class="data-helix"></div>
-                    <p class="confidence-score">AI CONFIDENCE SCORE</p>
-                    <p class="score-percent">99.8% AUTHENTICITY</p>
-                    <p class="date">AUTHENTICATION DATE: 2025-11-16</p>
-                </div>
-            </div>
-
+        <div class="qr-section">
+            <img src="qr-code-placeholder.png" alt="Scan to Verify" class="qr-placeholder">
+            <p class="trust-text">FORGE UNBREAKABLE PROOF. OWN THE ETERNAL.</p>
         </div>
 
         <div class="footer">
-            <p class="tagline">FORGE UNBREAKABLE PROOF. OWN THE ETERNAL.</p>
-            <div class="trust-info">
-                <img src="qr-code-placeholder.png" alt="QR Code" class="qr-code">
-                <p>Powered by UNIVERSAL TRUST OS</p>
-            </div>
+            <p>Powered by UNIVERSAL TRUST OS</p>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 1. Get the ID from the URL
             const urlParams = new URLSearchParams(window.location.search);
-            const certId = urlParams.get('cert_id'); // KEY: Must match the parameter name your Worker uses!
-
+            const certId = urlParams.get('cert_id');
             const displayElement = document.getElementById('certificate-id-display');
 
-            if (certId) {
-                // SUCCESS: The core high-conversion element is displayed!
-                displayElement.textContent = certId;
-            } else {
-                // Conversion Failure/Error handling
+            if (!certId) {
                 displayElement.textContent = 'Error: ID not found. Please verify the link.';
-                // You might want to log this error or redirect in a real-world scenario
+                return; 
             }
+
+            // Display the ID immediately
+            displayElement.textContent = certId;
+
+            // 2. MOCK DATABASE - This simulates looking up the shoe!
+            // In the future, you will replace this with a fetch() to your Worker.
+            const mockDatabaseResponse = {
+                model: "Air Jordan 1 High OG",
+                colorway: "Lost & Found",
+                size: "US 10.5",
+                condition: "Pristine / Deadstock",
+                score: "99.9% AUTHENTICITY",
+                date: new Date().toLocaleDateString()
+            };
+
+            // 3. Populate the HTML fields with the data
+            setTimeout(() => { // Slight delay to look like it's "thinking"
+                document.getElementById('model').textContent = mockDatabaseResponse.model;
+                document.getElementById('colorway').textContent = mockDatabaseResponse.colorway;
+                document.getElementById('size').textContent = mockDatabaseResponse.size;
+                document.getElementById('condition').textContent = mockDatabaseResponse.condition;
+                document.getElementById('score').textContent = mockDatabaseResponse.score;
+                document.getElementById('date').textContent = 'AUTHENTICATION DATE: ' + mockDatabaseResponse.date;
+            }, 500);
         });
     </script>
-
 </body>
 </html>
