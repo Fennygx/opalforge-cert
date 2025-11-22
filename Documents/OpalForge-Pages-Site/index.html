@@ -17,34 +17,27 @@
             font-family: 'Courier New', Courier, monospace;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* Changed from center to allow scrolling */
+            align-items: flex-start; /* Allows scrolling on mobile */
             min-height: 100vh;
-            padding: 20px 0; /* Adds space top/bottom on mobile */
-            /* REMOVED overflow: hidden so you can scroll! */
+            padding: 20px 0; 
         }
 
         /* MAIN CONTAINER */
         .certificate-container {
             position: relative;
             width: 90%;
-            max-width: 600px; /* Keeps it "thin" like you prefer */
-            
-            /* UPDATED: Main Border is now Cyan Blue */
-            border: 2px solid #00ffff; 
-            
+            max-width: 600px;
+            border: 2px solid #00ffff; /* Cyan Blue Border */
             padding: 2rem;
             background: #0a0a0a;
             box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
-            margin-bottom: 20px; /* Ensures space at bottom of page */
+            margin-bottom: 20px; 
         }
 
         /* HEADER SECTION */
         .header {
             text-align: center;
-            
-            /* UPDATED: Header Divider Line is now Cyan Blue */
-            border-bottom: 1px solid #00ffff;
-            
+            border-bottom: 1px solid #00ffff; /* Cyan Blue Line */
             padding-bottom: 1.5rem;
             margin-bottom: 1.5rem;
         }
@@ -62,7 +55,8 @@
         }
         .sub-header {
             font-size: 0.8rem;
-            color: #888;
+            /* UPDATED: Brighter Silver for readability */
+            color: #cccccc; 
             letter-spacing: 1px;
         }
         .cert-id {
@@ -88,8 +82,9 @@
             justify-content: space-between;
             margin-bottom: 0.5rem;
             font-size: 0.9rem;
-            color: #aaa;
-            border-bottom: 1px dashed #333; /* Kept dashed lines gray for readability */
+            /* UPDATED: Brighter Silver */
+            color: #cccccc; 
+            border-bottom: 1px dashed #333; 
             padding-bottom: 5px;
         }
         .detail-line span {
@@ -104,17 +99,16 @@
             margin-bottom: 2rem;
         }
         .authenticity-badge {
-            /* UPDATED: Report Box Border is now Cyan Blue */
-            border: 1px solid #00ffff;
+            border: 1px solid #00ffff; /* Cyan Blue Border */
             box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.05);
-            
             padding: 1.5rem;
             position: relative;
             background: rgba(0, 255, 255, 0.02);
         }
         .confidence-score {
             font-size: 0.8rem;
-            color: #888;
+            /* UPDATED: Brighter Silver */
+            color: #cccccc; 
             margin-bottom: 0.5rem;
         }
         .score-percent {
@@ -126,7 +120,8 @@
         .date {
             margin-top: 0.5rem;
             font-size: 0.7rem;
-            color: #666;
+            /* UPDATED: Medium Gray (visible but distinct from data) */
+            color: #aaaaaa; 
         }
 
         /* QR CODE SECTION */
@@ -144,7 +139,8 @@
         .trust-text {
             margin-top: 1rem;
             font-size: 0.7rem;
-            color: #555;
+            /* UPDATED: Brighter Silver */
+            color: #cccccc; 
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -154,8 +150,10 @@
             text-align: center;
             margin-top: 2rem;
             font-size: 0.6rem;
-            color: #444;
-            border-top: 1px solid #333;
+            /* UPDATED: Brighter Gray for readability */
+            color: #aaaaaa; 
+            /* UPDATED: Footer Line is now Cyan Blue */
+            border-top: 1px solid #00ffff; 
             padding-top: 1rem;
         }
     </style>
@@ -206,8 +204,6 @@
 
             if (!certId) {
                 displayElement.textContent = 'Error: ID not found. Please verify the link.';
-                // We intentionally DO NOT load the mock data if no ID is present.
-                // This keeps the "Loading..." text so users don't see fake data on a broken link.
                 return; 
             }
 
@@ -225,7 +221,6 @@
             };
 
             // 3. Populate the HTML fields
-            // Added a small delay to simulate the "AI Thinking" feel
             setTimeout(() => { 
                 document.getElementById('model').textContent = mockDatabaseResponse.model;
                 document.getElementById('colorway').textContent = mockDatabaseResponse.colorway;
