@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpalForge Verification</title>
+    
+    <link rel="icon" type="image/png" href="/public/assets/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/public/assets/favicon.svg" />
+    <link rel="shortcut icon" href="/public/assets/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/assets/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="OpalForge" />
+    <link rel="manifest" href="/public/site.webmanifest" />
+    
+    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="/public/style.css"> 
+</head>
+<body>
+    <div class="certificate-container">
+        <div class="header">
+            <img src="/public/assets/OpalForge-Logo.png" alt="OpalForge Logo" class="logo">
+            <h1>OPALFORGE</h1>
+            <p class="sub-header">OFFICIAL AI AUTHENTICATION CERTIFICATE</p>
+            <p class="cert-id">CERTIFICATE ID: <span id="certificate-id-display">Verifying...</span></p>
+        </div>
+        <div class="item-details">
+            <h3>ITEM DETAILS</h3>
+            <div class="detail-line">SNEAKER MODEL: <span id="model">Loading...</span></div>
+            <div class="detail-line">COLORWAY: <span id="colorway">Loading...</span></div>
+            <div class="detail-line">SIZE: <span id="size">Loading...</span></div>
+            <div class="detail-line">CONDITION: <span id="condition">Loading...</span></div>
+        </div>
+        <div class="auth-report">
+            <h3>AUTHENTICATION REPORT</h3>
+            <div class="authenticity-badge">
+                <p class="confidence-score">AI CONFIDENCE SCORE</p>
+                <p class="score-percent" id="score">--.-%</p>
+                <p class="date" id="date">AUTHENTICATION DATE: --</p>
+            </div>
+        </div>
+        <div class="qr-section">
+            <img src="/public/assets/qr-code-placeholder.png" alt="Scan to Verify" class="qr-placeholder">
+            <p class="trust-text">FORGE UNBREAKABLE PROOF. OWN THE ETERNAL.</p>
+        </div>
+        <div class="footer">
+            <p>Powered by UNIVERSAL TRUST OS</p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const certId = urlParams.get('cert_id');
+            const displayElement = document.getElementById('certificate-id-display');
+            
+            if (!certId) {
+                displayElement.textContent = 'Error: ID not found. Please verify the link.';
+                return; 
+            }
+            
+            displayElement.textContent = certId;
+            
+            const WORKER_URL = 'https://cert-generator-worker.garcia-fenny.workers.dev';
+            
+            try {
+                // We send the ID to the Worker for processing
+                const response = await fetch(WORKER_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ certificate_id: certId })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Worker response failed: ' + response.statusText);
+                }
+                
+                // Temporary: Display Worker's message on the screen for confirmation
+                const data = await response.json(); 
+                document.getElementById('model').textContent = 'WORKER RESPONSE: ' + data.message;
+                document.getElementById('score').textContent = data.status.toUpperCase();
+
+
+            } catch (error) {
+                document.getElementById('model').textContent = 'Error fetching data: ' + error.message;
+                document.getElementById('score').textContent = '--.-%';
+            }
+        });
+    </script>
+</body>
+</html>
